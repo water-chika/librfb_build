@@ -4,3 +4,15 @@
 [submodule "vulkan_helper"]
 	path = vulkan_helper
 	url = https://github.com/water-chika/vulkan_helper
+[submodule "cpp_helper"]
+	path = cpp_helper
+	url = https://github.com/water-chika/cpp_helper
+[submodule "hip_dummy"]
+	path = hip_dummy
+	url = https://github.com/water-chika/hip_dummy
+[submodule "vulkan_start"]
+	path = vulkan_start
+	url = https://github.com/water-chika/vulkan_start
+[submodule "win32_helper"]
+	path = win32_helper
+	url = https://github.com/water-chika/win32_helper
