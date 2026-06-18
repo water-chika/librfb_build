@@ -1,0 +1,6 @@
+[submodule "librfb"]
+	path = librfb
+	url = https://github.com/water-chika/librfb
+[submodule "vulkan_helper"]
+	path = vulkan_helper
+	url = https://github.com/water-chika/vulkan_helper
