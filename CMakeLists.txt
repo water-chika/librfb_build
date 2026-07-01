@@ -8,5 +8,6 @@ add_subdirectory(win32_helper)
 add_subdirectory(vulkan_helper)
 add_subdirectory(vulkan_start)
 add_subdirectory(posix_cpp)
+add_subdirectory(xkb_helper)
 add_subdirectory(librfb)
 

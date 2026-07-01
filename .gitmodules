@@ -19,3 +19,6 @@
 [submodule "posix_cpp"]
 	path = posix_cpp
 	url = https://github.com/water-chika/posix_cpp
+[submodule "xkb_helper"]
+	path = xkb_helper
+	url = https://github.com/water-chika/xkb_helper
