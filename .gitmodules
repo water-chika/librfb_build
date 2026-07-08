@@ -31,3 +31,6 @@
 [submodule "wayland_import"]
 	path = wayland_import
 	url = https://github.com/water-chika/wayland_import
+[submodule "socket_helper"]
+	path = socket_helper
+	url = https://github.com/water-chika/socket_helper
