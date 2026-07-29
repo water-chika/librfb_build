@@ -34,3 +34,12 @@
 [submodule "socket_helper"]
 	path = socket_helper
 	url = https://github.com/water-chika/socket_helper
+[submodule "Vulkan-Headers"]
+	path = Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers
+[submodule "Vulkan-Loader"]
+	path = Vulkan-Loader
+	url = https://github.com/KhronosGroup/Vulkan-Loader
+[submodule "glslang"]
+	path = glslang
+	url = https://github.com/KhronosGroup/glslang
