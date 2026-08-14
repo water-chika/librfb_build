@@ -1,21 +1,9 @@
 [submodule "librfb"]
 	path = librfb
 	url = https://github.com/water-chika/librfb
-[submodule "vulkan_helper"]
-	path = vulkan_helper
-	url = https://github.com/water-chika/vulkan_helper
 [submodule "cpp_helper"]
 	path = cpp_helper
 	url = https://github.com/water-chika/cpp_helper
-[submodule "hip_dummy"]
-	path = hip_dummy
-	url = https://github.com/water-chika/hip_dummy
-[submodule "vulkan_start"]
-	path = vulkan_start
-	url = https://github.com/water-chika/vulkan_start
-[submodule "win32_helper"]
-	path = win32_helper
-	url = https://github.com/water-chika/win32_helper
 [submodule "posix_cpp"]
 	path = posix_cpp
 	url = https://github.com/water-chika/posix_cpp
@@ -34,12 +22,9 @@
 [submodule "socket_helper"]
 	path = socket_helper
 	url = https://github.com/water-chika/socket_helper
-[submodule "Vulkan-Headers"]
-	path = Vulkan-Headers
-	url = https://github.com/KhronosGroup/Vulkan-Headers
-[submodule "Vulkan-Loader"]
-	path = Vulkan-Loader
-	url = https://github.com/KhronosGroup/Vulkan-Loader
-[submodule "glslang"]
-	path = glslang
-	url = https://github.com/KhronosGroup/glslang
+[submodule "hip_helper"]
+	path = hip_helper
+	url = https://github.com/water-chika/hip_helper
+[submodule "drm_xxxx"]
+	path = drm_xxxx
+	url = https://github.com/water-chika/drm_xxxx
