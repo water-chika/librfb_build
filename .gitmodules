@@ -28,3 +28,6 @@
 [submodule "drm_xxxx"]
 	path = drm_xxxx
 	url = https://github.com/water-chika/drm_xxxx
+[submodule "remote-media"]
+	path = remote-media
+	url = /mnt/repos/remote-media
