@@ -1,0 +1,20 @@
+{
+  "name": "librfb-build",
+  "version-string": "0.1.0",
+  "description": "RFB client, server, and native viewer tools",
+  "dependencies": [
+    "openssl",
+    "zlib",
+    {
+      "name": "ffmpeg",
+      "features": [
+        "avcodec",
+        "avdevice",
+        "avformat",
+        "swscale",
+        "x264",
+        "zlib"
+      ]
+    }
+  ]
+}
