@@ -31,3 +31,6 @@
 [submodule "remote-media"]
 	path = remote-media
 	url = /mnt/repos/remote-media
+[submodule "build_helper"]
+	path = build_helper
+	url = ssh://git@ssh.github.com/water-chika/build_helper
