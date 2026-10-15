@@ -3,13 +3,14 @@
 // instead of CMake.
 //
 // In scope: rfb_server, rfb_demo, rfb_recorder, rfb_input, rfb_capture,
-// rfb_clipboard - everything that only needs cpp_helper/socket_helper/
-// remote-media/zlib/openssl/ffmpeg.
-// Out of scope (not attempted here): rfb_window_demo (Wayland+DRM+HIP),
-// rfb_window_win32 (Windows/MSVC-only), and the test targets (ctest/python
-// harness) - porting those to build_helper would mean also reimplementing
-// wayland-scanner protocol codegen and a HIP compile path, which is a
-// separate, much larger task.
+// rfb_clipboard, rfb_control_tests, rfb_trace_tests, rfb_fragmentation_tests,
+// rfb_server_core_tests - everything that only needs cpp_helper/
+// socket_helper/remote-media/zlib/openssl/ffmpeg.
+// Out of scope (not attempted here): rfb_window_demo + test_hip
+// (Wayland+DRM+HIP), rfb_window_win32 (Windows/MSVC-only), and the Python
+// ctest harness - porting those to build_helper would mean also
+// reimplementing wayland-scanner protocol codegen and a HIP compile path,
+// which is a separate, much larger task.
 #include <filesystem>
 #include <iostream>
 #include <vector>
@@ -47,6 +48,11 @@ int main() {
         "/usr/lib/libavutil.so", "/usr/lib/libswscale.so",
     };
 
+    std::vector<std::string> server_core_sources = {
+        (root / "remote-media" / "src" / "frame.cpp").string(),
+        (librfb / "server_core.cpp").string(),
+    };
+
     std::vector<target> targets = {
         {"rfb_server",
          {(root / "remote-media" / "src" / "frame.cpp").string(),
@@ -57,14 +63,22 @@ int main() {
         {"rfb_input", {(librfb / "input.cpp").string()}, {}},
         {"rfb_capture", {(librfb / "capture.cpp").string()}, {}},
         {"rfb_clipboard", {(librfb / "clipboard.cpp").string()}, {}},
+        {"rfb_control_tests", {(librfb / "test_control.cpp").string()}, {}},
+        {"rfb_trace_tests", {(librfb / "test_trace.cpp").string()}, {}},
+        {"rfb_fragmentation_tests", {(librfb / "test_rfb_fragmentation.cpp").string()}, {}},
+        {"rfb_server_core_tests", {(librfb / "test_server_core.cpp").string()}, {}},
     };
 
     bool all_ok = true;
     for (auto& t : targets) {
-        bool uses_rfb_lib = (t.name != "rfb_server");
+        bool is_server_core_test = (t.name == "rfb_server_core_tests");
+        bool uses_rfb_lib = (t.name != "rfb_server" && !is_server_core_test);
 
         std::vector<std::string> sources = include_dirs;
         sources.insert(sources.end(), common_sources.begin(), common_sources.end());
+        if (is_server_core_test) {
+            sources.insert(sources.end(), server_core_sources.begin(), server_core_sources.end());
+        }
         if (uses_rfb_lib) {
             sources.insert(sources.end(), rfb_lib_sources.begin(), rfb_lib_sources.end());
         }
