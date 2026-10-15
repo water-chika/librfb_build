@@ -24,6 +24,10 @@ struct target {
 
 int main() {
     std::filesystem::path root = ".";
+    // Separate build directory (CMake-style out-of-source build): every
+    // compiled object/binary from this driver lands under here instead of
+    // scattered across the source tree, and build_helper creates it for us.
+    std::filesystem::path build_dir = root / "build_librfb_out";
     auto librfb = root / "librfb";
     auto cpp_helper = root / "cpp_helper";
     auto socket_helper = root / "socket_helper";
@@ -89,13 +93,13 @@ int main() {
         }
         sources.insert(sources.end(), t.extra_libs.begin(), t.extra_libs.end());
 
-        auto out = t.name + "_bh";
+        auto out = (build_dir / (t.name + "_bh")).string();
         auto res = build::c_plus_plus_compile(build::find_cxx_compiler(), sources, out);
         if (res != 0) {
             std::cerr << "build_librfb: FAILED " << t.name << std::endl;
             all_ok = false;
         } else {
-            std::cout << "build_librfb: built ./" << out << std::endl;
+            std::cout << "build_librfb: built " << out << std::endl;
         }
     }
 
@@ -112,7 +116,7 @@ int main() {
         auto wayland_helper = root / "wayland_helper";
         auto drm_xxxx = root / "drm_xxxx";
         auto hip_helper = root / "hip_helper";
-        auto wl_proto = root / "build_librfb_wl_proto";
+        auto wl_proto = build_dir / "wl_proto"; // objects also go under build_dir
         auto wayland_protocols = root / "wayland-protocols";
 
         std::filesystem::create_directories(wl_proto);
@@ -212,14 +216,14 @@ int main() {
         };
         for (auto& t : wl_targets) {
             auto [main_ok, main_obj] = compile_one({t.main_src, lang::hip});
-            auto out = t.name + "_bh";
+            auto out = (build_dir / (t.name + "_bh")).string();
             if (compile_ok && main_ok) {
                 std::vector<std::string> link_items = common_objs;
                 link_items.push_back(main_obj.string());
                 link_items.insert(link_items.end(), extra_libs.begin(), extra_libs.end());
                 auto res = build::link_objects(host_cxx, link_items, out);
                 if (res == 0) {
-                    std::cout << "build_librfb: built ./" << out << std::endl;
+                    std::cout << "build_librfb: built " << out << std::endl;
                 } else {
                     std::cerr << "build_librfb: FAILED " << t.name << " (link)" << std::endl;
                     all_ok = false;
