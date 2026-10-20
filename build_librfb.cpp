@@ -126,6 +126,8 @@ int main() {
             {"primary-selection-unstable-v1-client",
              wayland_protocols / "unstable" / "primary-selection" / "primary-selection-unstable-v1.xml"},
             {"linux-dmabuf-v1-client", wayland_protocols / "stable" / "linux-dmabuf" / "linux-dmabuf-v1.xml"},
+            {"linux-drm-syncobj-v1-client",
+             wayland_protocols / "staging" / "linux-drm-syncobj" / "linux-drm-syncobj-v1.xml"},
         };
         bool proto_ok = true;
         for (auto& p : protocols) {
@@ -175,6 +177,7 @@ int main() {
             {wl_proto / "xdg-shell-client.c", lang::c},
             {wl_proto / "primary-selection-unstable-v1-client.c", lang::c},
             {wl_proto / "linux-dmabuf-v1-client.c", lang::c},
+            {wl_proto / "linux-drm-syncobj-v1-client.c", lang::c},
             {hip_helper / "hip_helper.cpp", lang::hip},
         };
 
